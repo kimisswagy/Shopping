@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,1641 +12,2014 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
+```
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%);
+        min-height: 100vh;
+        color: #333;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-        }
+    .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 60px;
+        padding: 40px 20px;
+    }
 
+    .header h1 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientShift 4s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .header p {
+        font-size: 1.4rem;
+        opacity: 0.95;
+        margin-bottom: 15px;
+    }
+
+    .header .subtitle {
+        font-size: 1.1rem;
+        opacity: 0.8;
+    }
+
+    /* Main Category Selection */
+    .category-selection {
+        display: block;
+    }
+
+    .categories-header {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+    }
+
+    .categories-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .categories-header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+
+    .main-category {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 25px;
+        padding: 35px 25px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        transition: all 0.4s ease;
+        cursor: pointer;
+        border: 3px solid transparent;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .main-category::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s;
+    }
+
+    .main-category:hover::before {
+        left: 100%;
+    }
+
+    .main-category:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        border-color: var(--category-color);
+    }
+
+    .main-category.selected {
+        border-color: var(--category-color);
+        background: linear-gradient(135deg, var(--category-bg) 0%, var(--category-bg-light) 100%);
+    }
+
+    .category-icon-large {
+        width: 90px;
+        height: 90px;
+        background: var(--category-gradient);
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        color: white;
+        font-size: 2.8rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+
+    .main-category:hover .category-icon-large {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .category-title-large {
+        font-size: 1.9rem;
+        font-weight: 800;
+        color: #2d3748;
+        margin-bottom: 15px;
+        transition: color 0.3s ease;
+    }
+
+    .category-description {
+        color: #718096;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .category-stats {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 20px;
+        border-top: 2px solid #e2e8f0;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--category-color);
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        color: #a0aec0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Category Color Variables */
+    .food { 
+        --category-color: #e53e3e; 
+        --category-gradient: linear-gradient(135deg, #e53e3e, #c53030);
+        --category-bg: #fed7d7;
+        --category-bg-light: #fee;
+    }
+    
+    .fashion { 
+        --category-color: #d69e2e; 
+        --category-gradient: linear-gradient(135deg, #d69e2e, #b7791f);
+        --category-bg: #faf089;
+        --category-bg-light: #fefcbf;
+    }
+    
+    .electronics { 
+        --category-color: #3182ce; 
+        --category-gradient: linear-gradient(135deg, #3182ce, #2c5282);
+        --category-bg: #bee3f8;
+        --category-bg-light: #ebf8ff;
+    }
+    
+    .home { 
+        --category-color: #38a169; 
+        --category-gradient: linear-gradient(135deg, #38a169, #2f855a);
+        --category-bg: #c6f6d5;
+        --category-bg-light: #f0fff4;
+    }
+    
+    .health { 
+        --category-color: #805ad5; 
+        --category-gradient: linear-gradient(135deg, #805ad5, #6b46c1);
+        --category-bg: #e9d8fd;
+        --category-bg-light: #faf5ff;
+    }
+    
+    .automotive { 
+        --category-color: #dd6b20; 
+        --category-gradient: linear-gradient(135deg, #dd6b20, #c05621);
+        --category-bg: #fbd38d;
+        --category-bg-light: #fffaf0;
+    }
+    
+    .entertainment { 
+        --category-color: #e53e3e; 
+        --category-gradient: linear-gradient(135deg, #e53e3e, #c53030);
+        --category-bg: #fed7d7;
+        --category-bg-light: #fee;
+    }
+    
+    .services { 
+        --category-color: #319795; 
+        --category-gradient: linear-gradient(135deg, #319795, #2c7a7b);
+        --category-bg: #b2f5ea;
+        --category-bg-light: #e6fffa;
+    }
+
+    /* Detailed Category View */
+    .detailed-category {
+        display: none;
+        background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+        border-radius: 30px;
+        padding: 50px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        margin-bottom: 40px;
+        border: 3px solid var(--category-color);
+    }
+
+    .back-button {
+        background: #4a5568;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 12px;
+        cursor: pointer;
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .back-button:hover {
+        background: #2d3748;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .category-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 3px solid #e2e8f0;
+    }
+
+    .category-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--category-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 30px;
+        color: white;
+        font-size: 2.2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .category-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #2d3748;
+    }
+
+    .location-section {
+        background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 40px;
+        border-left: 5px solid var(--category-color);
+    }
+
+    .location-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .location-input {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .location-input input {
+        flex: 1;
+        padding: 18px;
+        border: 3px solid #e2e8f0;
+        border-radius: 15px;
+        font-size: 1.1rem;
+        min-width: 300px;
+        transition: all 0.3s ease;
+    }
+
+    .location-input input:focus {
+        border-color: var(--category-color);
+        box-shadow: 0 0 0 3px rgba(var(--category-color-rgb), 0.1);
+        outline: none;
+    }
+
+    .location-btn {
+        background: var(--category-gradient);
+        color: white;
+        border: none;
+        padding: 18px 35px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .location-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .price-range-section {
+        margin-bottom: 40px;
+        padding: 30px;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 20px;
+        border-left: 5px solid var(--category-color);
+    }
+
+    .price-range-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .price-slider {
+        width: 100%;
+        margin-bottom: 20px;
+        height: 12px;
+        background: #e2e8f0;
+        border-radius: 10px;
+        outline: none;
+        appearance: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .price-slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 28px;
+        height: 28px;
+        background: var(--category-gradient);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .price-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.3);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .price-display {
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: var(--category-color);
+        background: white;
+        padding: 15px;
+        border-radius: 15px;
+        border: 3px solid var(--category-color);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .subcategories-section {
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: #2d3748;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .subcategory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .subcategory-btn {
+        background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+        border: 3px solid #e2e8f0;
+        padding: 20px 15px;
+        border-radius: 15px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .subcategory-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border-color: var(--category-color);
+    }
+
+    .subcategory-btn.active {
+        background: var(--category-gradient);
+        color: white;
+        border-color: var(--category-color);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .filters-section {
+        display: none;
+        padding: 30px;
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 20px;
+        margin-bottom: 30px;
+        border-left: 5px solid var(--category-color);
+    }
+
+    .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+
+    .filter-group {
+        margin-bottom: 20px;
+    }
+
+    .filter-group label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #2d3748;
+    }
+
+    .filter-group select, .filter-group input {
+        width: 100%;
+        padding: 15px;
+        border: 3px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .filter-group select:focus, .filter-group input:focus {
+        border-color: var(--category-color);
+        box-shadow: 0 0 0 3px rgba(var(--category-color-rgb), 0.1);
+        outline: none;
+    }
+
+    .search-button {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        border: none;
+        padding: 22px 50px;
+        border-radius: 18px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: 700;
+        width: 100%;
+        transition: all 0.4s ease;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 10px 30px rgba(72, 187, 120, 0.3);
+    }
+
+    .search-button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(72, 187, 120, 0.4);
+        background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+    }
+
+    .results-section {
+        background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+        border-radius: 25px;
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        display: none;
+        border-top: 5px solid var(--category-color);
+    }
+
+    .results-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .results-header h2 {
+        font-size: 2.5rem;
+        color: #2d3748;
+        margin-bottom: 15px;
+    }
+
+    .results-count {
+        font-size: 1.2rem;
+        color: #718096;
+    }
+
+    .business-card {
+        border: 3px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 25px;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+    }
+
+    .business-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        border-color: var(--category-color);
+    }
+
+    .business-name {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #2d3748;
+        margin-bottom: 10px;
+    }
+
+    .business-type {
+        background: var(--category-gradient);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .business-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .info-item {
+        font-size: 1rem;
+        color: #4a5568;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .info-item strong {
+        color: #2d3748;
+    }
+
+    .business-link {
+        display: inline-block;
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        padding: 12px 25px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .business-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+        background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+    }
+
+    .newsletter-section {
+        background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+        border-radius: 25px;
+        padding: 50px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        border-top: 5px solid #48bb78;
+    }
+
+    .newsletter-section h3 {
+        margin-bottom: 20px;
+        color: #2d3748;
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    .newsletter-section p {
+        margin-bottom: 30px;
+        color: #718096;
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: 20px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .newsletter-form input {
+        flex: 1;
+        padding: 18px;
+        border: 3px solid #e2e8f0;
+        border-radius: 15px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+    .newsletter-form input:focus {
+        border-color: #48bb78;
+        box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+        outline: none;
+    }
+
+    .newsletter-form button {
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        color: white;
+        border: none;
+        padding: 18px 35px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .newsletter-form button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+    }
+
+    @media (max-width: 768px) {
         .header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-
-        .header .subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        /* Initial Category Selection */
-        .category-selection {
-            display: block;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .main-category {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 3px solid transparent;
-        }
-
-        .main-category:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            border-color: #667eea;
-        }
-
-        .main-category.selected {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
-        }
-
-        .category-icon-large {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: white;
             font-size: 2.5rem;
         }
-
-        .category-title-large {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 15px;
+        
+        .location-input, .newsletter-form {
+            flex-direction: column;
         }
-
-        .category-description {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.5;
+        
+        .category-grid {
+            grid-template-columns: 1fr;
         }
-
-        /* Detailed Category View */
-        .detailed-category {
-            display: none;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .back-button {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 30px;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-        }
-
-        .back-button:hover {
-            background: #5a6268;
-            transform: translateY(-1px);
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .category-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            color: white;
-            font-size: 1.8rem;
-        }
-
-        .category-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .location-section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .location-input {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .location-input input {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            min-width: 250px;
-        }
-
-        .location-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .location-btn:hover {
-            background: #5a67d8;
-            transform: translateY(-2px);
-        }
-
-        .price-range-section {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-
-        .price-range-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .price-slider {
-            width: 100%;
-            margin-bottom: 15px;
-            height: 8px;
-            background: #ddd;
-            border-radius: 5px;
-            outline: none;
-        }
-
-        .price-display {
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: #667eea;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
-        }
-
-        .subcategories-section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
+        
         .subcategory-grid {
-            display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
         }
+        
+        .detailed-category {
+            padding: 30px 20px;
+        }
+    }
+</style>
+```
 
-        .subcategory-btn {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            padding: 15px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .subcategory-btn:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
-        }
-
-        .subcategory-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .filters-section {
-            display: none;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            margin-bottom: 25px;
-        }
-
-        .filters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .filter-group {
-            margin-bottom: 15px;
-        }
-
-        .filter-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        .filter-group select, .filter-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 0.95rem;
-        }
-
-        .search-button {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            width: 100%;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-        }
-
-        .search-button:hover {
-            background: #218838;
-            transform: translateY(-2px);
-        }
-
-        .results-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .business-card {
-            border: 2px solid #f0f0f0;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            transition: all 0.2s ease;
-        }
-
-        .business-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-color: #667eea;
-        }
-
-        .business-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .business-type {
-            background: #667eea;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .business-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .info-item {
-            font-size: 0.95rem;
-            color: #666;
-        }
-
-        .info-item strong {
-            color: #333;
-        }
-
-        .business-link {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .business-link:hover {
-            background: #218838;
-            transform: translateY(-1px);
-        }
-
-        .newsletter-section {
-            background: white;
-            border-radius: 15px;
-            padding: 35px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .newsletter-section h3 {
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 1.5rem;
-        }
-
-        .newsletter-section p {
-            margin-bottom: 25px;
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: 15px;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .newsletter-form button {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .newsletter-form button:hover {
-            background: #218838;
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .location-input, .newsletter-form {
-                flex-direction: column;
-            }
-            
-            .category-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .subcategory-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>LocalFind</h1>
-            <p>Discover local businesses and support your community</p>
-            <p class="subtitle">Choose a category below to start shopping local</p>
+            <p>Discover amazing local businesses and support your community</p>
+            <p class="subtitle">Shop local, make a difference</p>
         </div>
 
-        <!-- Main Category Selection Screen -->
-        <div class="category-selection" id="categorySelection">
-            <div class="category-grid">
-                <div class="main-category" onclick="selectMainCategory('food')">
-                    <div class="category-icon-large">🍽</div>
-                    <div class="category-title-large">Food & Dining</div>
-                    <div class="category-description">Restaurants, cafes, grocery stores, and local food producers</div>
+```
+    <!-- Main Category Selection Screen -->
+    <div class="category-selection" id="categorySelection">
+        <div class="categories-header">
+            <h2>Choose Your Shopping Category</h2>
+            <p>Select from our comprehensive range of local business categories</p>
+        </div>
+        
+        <div class="category-grid">
+            <div class="main-category food" onclick="selectMainCategory('food')">
+                <div class="category-icon-large">🍕</div>
+                <div class="category-title-large">Food & Dining</div>
+                <div class="category-description">Restaurants, cafes, bakeries, food trucks, grocery stores, and local food producers</div>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1,200+</div>
+                        <div class="stat-label">Restaurants</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">300+</div>
+                        <div class="stat-label">Markets</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Cafes</div>
+                    </div>
                 </div>
+            </div>
 
-                <div class="main-category" onclick="selectMainCategory('clothes')">
-                    <div class="category-icon-large">👕</div>
-                    <div class="category-title-large">Clothing & Fashion</div>
-                    <div class="category-description">Boutiques, thrift stores, shoes, accessories, and local designers</div>
+            <div class="main-category fashion" onclick="selectMainCategory('fashion')">
+                <div class="category-icon-large">👗</div>
+                <div class="category-title-large">Fashion & Apparel</div>
+                <div class="category-description">Clothing boutiques, shoe stores, accessories, jewelry, and local fashion designers</div>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">800+</div>
+                        <div class="stat-label">Boutiques</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Designers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Thrift Shops</div>
+                    </div>
                 </div>
+            </div>
 
-                <div class="main-category" onclick="selectMainCategory('toys')">
-                    <div class="category-icon-large">🧸</div>
-                    <div class="category-title-large">Toys & Games</div>
-                    <div class="category-description">Educational toys, games, puzzles, and specialty toy stores</div>
+            <div class="main-category electronics" onclick="selectMainCategory('electronics')">
+                <div class="category-icon-large">📱</div>
+                <div class="category-title-large">Electronics & Tech</div>
+                <div class="category-description">Computer stores, phone repair, gaming shops, audio equipment, and tech accessories</div>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">450+</div>
+                        <div class="stat-label">Tech Stores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">120+</div>
+                        <div class="stat-label">Repair Shops</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">80+</div>
+                        <div class="stat-label">Gaming</div>
+                    </div>
                 </div>
+            </div>
 
-                <div class="main-category" onclick="selectMainCategory('general')">
-                    <div class="category-icon-large">🛍</div>
-                    <div class="category-title-large">General Shopping</div>
-                    <div class="category-description">Electronics, books, home goods, hardware, and specialty items</div>
+            <div class="main-category home" onclick="selectMainCategory('home')">
+                <div class="category-icon-large">🏠</div>
+                <div class="category-title-large">Home & Garden</div>
+                <div class="category-description">Furniture stores, home decor, garden centers, hardware stores, and home improvement</div>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">600+</div>
+                        <div class="stat-label">Home Stores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">250+</div>
+                        <div class="stat-label">Garden Centers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">180+</div>
+                        <div class="stat-label">Hardware</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-category health" onclick="selectMainCategory('health')">
+                <div class="category-icon-large">💊</div>
+                <div class="category-title-large">Health & Wellness</div>
+                <div class="category-description">Pharmacies, health food stores, fitness equipment, beauty supplies, and wellness centers</div>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">350+</div>
+                        <div class="stat-label">Health Stores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Beauty</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">120+</div>
+                        <div class="stat-label">Wellness</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-category automotive" onclick="selectMainCategory('automotive')">
+                <div class="category-icon-large">🚗</div>
+                <div class="category-title-large">Automotive</div>
+                <div class="category-description">Auto parts, car accessories, tire shops, automotive services, and motorcycle gear</div>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">400+</div>
+                        <div class="stat-label">Auto Shops</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Parts Stores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">80+</div>
+                        <div class="stat-label">Tire Shops</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-category entertainment" onclick="selectMainCategory('entertainment')">
+                <div class="category-icon-large">🎮</div>
+                <div class="category-title-large">Entertainment & Hobbies</div>
+                <div class="category-description">Toy stores, game shops, bookstores, music stores, sports equipment, and hobby supplies</div>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">300+</div>
+                        <div class="stat-label">Toy Stores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">180+</div>
+                        <div class="stat-label">Game Shops</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">220+</div>
+                        <div class="stat-label">Bookstores</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-category services" onclick="selectMainCategory('services')">
+                <div class="category-icon-large">🔧</div>
+                <div class="category-title-large">Services & Professional</div>
+                <div class="category-description">Professional services, repair shops, cleaning services, and specialized local services</div>
+                <div class="category-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Services</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">250+</div>
+                        <div class="stat-label">Repair Shops</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">180+</div>
+                        <div class="stat-label">Professionals</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Category Views -->
+    <div class="detailed-category food" id="foodCategory">
+        <button class="back-button" onclick="goBack()">← Back to Categories</button>
+        <div class="category-header">
+            <div class="category-icon">🍕</div>
+            <div class="category-title">Food & Dining</div>
+        </div>
+
+        <div class="location-section">
+            <div class="location-title">📍 Set Your Location</div>
+            <div class="location-input">
+                <input type="text" id="foodLocationInput" placeholder="Enter your city, state or ZIP code">
+                <button class="location-btn" onclick="setLocation('food')">Set Location</button>
+            </div>
+        </div>
+
+        <div class="price-range-section">
+            <div class="price-range-title">💰 Price Range per Item/Meal</div>
+            <input type="range" class="price-slider" min="5" max="150" value="50" 
+                   oninput="updatePriceRange('food', this.value)">
+            <div class="price-display">$5 - $<span id="foodCurrent">50</span></div>
+        </div>
+
+        <div class="subcategories-section">
+            <div class="section-title">🍽️ What are you looking for?</div>
+            <div class="subcategory-grid">
+                <div class="subcategory-btn" onclick="selectSubcategory('food', 'breakfast')">Breakfast</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('food', 'lunch')">Lunch</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('food', 'dinner')">Dinner</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('food', 'dessert')">Desserts</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('food', 'coffee')">Coffee & Drinks</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('food', 'groceries')">Groceries</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('food', 'fastfood')">Fast Food</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('food', 'alcohol')">Beer & Wine</div>
+            </div>
+        </div>
+
+        <div class="filters-section" id="foodFilters">
+            <div class="section-title">🔍 Additional Filters</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Cuisine Type:</label>
+                    <select>
+                        <option>All Cuisines</option>
+                        <option>American</option>
+                        <option>Italian</option>
+                        <option>Mexican</option>
+                        <option>Asian</option>
+                        <option>Mediterranean</option>
+                        <option>Indian</option>
+                        <option>French</option>
+                        <option>Thai</option>
+                        <option>Chinese</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Dietary Options:</label>
+                    <select>
+                        <option>All Options</option>
+                        <option>Vegetarian</option>
+                        <option>Vegan</option>
+                        <option>Gluten-Free</option>
+                        <option>Keto-Friendly</option>
+                        <option>Organic</option>
+                        <option>Halal</option>
+                        <option>Kosher</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Business Type:</label>
+                    <select>
+                        <option>All Types</option>
+                        <option>Local Only</option>
+                        <option>Regional Chain</option>
+                        <option>Family Owned</option>
+                        <option>Farm to Table</option>
+                        <option>Food Truck</option>
+                    </select>
                 </div>
             </div>
         </div>
 
-        <!-- Detailed Category Views -->
-        <div class="detailed-category" id="foodCategory">
-            <button class="back-button" onclick="goBack()">← Back to Categories</button>
-            <div class="category-header">
-                <div class="category-icon">🍽</div>
-                <div class="category-title">Food & Dining</div>
-            </div>
+        <button class="search-button" onclick="searchBusinesses('food')">Find Food & Dining Near Me</button>
+    </div>
 
-            <div class="location-section">
-                <div class="location-input">
-                    <input type="text" id="foodLocationInput" placeholder="Enter your city, state or ZIP code">
-                    <button class="location-btn" onclick="setLocation('food')">Set Location</button>
-                </div>
-            </div>
-
-            <div class="price-range-section">
-                <div class="price-range-title">Price Range per Item/Meal</div>
-                <input type="range" class="price-slider" min="5" max="100" value="50" 
-                       oninput="updatePriceRange('food', this.value)">
-                <div class="price-display">$5 - $<span id="foodCurrent">50</span></div>
-            </div>
-
-            <div class="subcategories-section">
-                <div class="section-title">What are you looking for?</div>
-                <div class="subcategory-grid">
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'breakfast')">Breakfast</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'lunch')">Lunch</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'dinner')">Dinner</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'dessert')">Dessert</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'coffee')">Coffee & Drinks</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'groceries')">Groceries</div>
-                </div>
-            </div>
-
-            <div class="filters-section" id="foodFilters">
-                <div class="section-title">Additional Filters</div>
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label>Cuisine Type:</label>
-                        <select>
-                            <option>All Cuisines</option>
-                            <option>American</option>
-                            <option>Italian</option>
-                            <option>Mexican</option>
-                            <option>Asian</option>
-                            <option>Mediterranean</option>
-                            <option>Indian</option>
-                            <option>French</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Dietary Options:</label>
-                        <select>
-                            <option>All Options</option>
-                            <option>Vegetarian</option>
-                            <option>Vegan</option>
-                            <option>Gluten-Free</option>
-                            <option>Keto-Friendly</option>
-                            <option>Organic</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Business Type:</label>
-                        <select>
-                            <option>All Types</option>
-                            <option>Local Only</option>
-                            <option>Regional Chain</option>
-                            <option>Family Owned</option>
-                            <option>Farm to Table</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="search-button" onclick="searchBusinesses('food')">Find Food & Dining Near Me</button>
+    <div class="detailed-category fashion" id="fashionCategory">
+        <button class="back-button" onclick="goBack()">← Back to Categories</button>
+        <div class="category-header">
+            <div class="category-icon">👗</div>
+            <div class="category-title">Fashion & Apparel</div>
         </div>
 
-        <div class="detailed-category" id="clothesCategory">
-            <button class="back-button" onclick="goBack()">← Back to Categories</button>
-            <div class="category-header">
-                <div class="category-icon">👕</div>
-                <div class="category-title">Clothing & Fashion</div>
+        <div class="location-section">
+            <div class="location-title">📍 Set Your Location</div>
+            <div class="location-input">
+                <input type="text" id="fashionLocationInput" placeholder="Enter your city, state or ZIP code">
+                <button class="location-btn" onclick="setLocation('fashion')">Set Location</button>
             </div>
-
-            <div class="location-section">
-                <div class="location-input">
-                    <input type="text" id="clothesLocationInput" placeholder="Enter your city, state or ZIP code">
-                    <button class="location-btn" onclick="setLocation('clothes')">Set Location</button>
-                </div>
-            </div>
-
-            <div class="price-range-section">
-                <div class="price-range-title">Price Range per Item</div>
-                <input type="range" class="price-slider" min="10" max="500" value="100" 
-                       oninput="updatePriceRange('clothes', this.value)">
-                <div class="price-display">$10 - $<span id="clothesCurrent">100</span></div>
-            </div>
-
-            <div class="subcategories-section">
-                <div class="section-title">What type of clothing?</div>
-                <div class="subcategory-grid">
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'shirts')">Shirts & Tops</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'pants')">Pants & Jeans</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'dresses')">Dresses</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'shoes')">Shoes</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'accessories')">Accessories</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'outerwear')">Jackets & Coats</div>
-                </div>
-            </div>
-
-            <div class="filters-section" id="clothesFilters">
-                <div class="section-title">Additional Filters</div>
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label>Size Range:</label>
-                        <select>
-                            <option>All Sizes</option>
-                            <option>XS - S</option>
-                            <option>M - L</option>
-                            <option>XL - XXL</option>
-                            <option>Plus Size (3X+)</option>
-                            <option>Petite</option>
-                            <option>Tall</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Style:</label>
-                        <select>
-                            <option>All Styles</option>
-                            <option>Casual</option>
-                            <option>Formal/Business</option>
-                            <option>Vintage/Retro</option>
-                            <option>Athletic/Sporty</option>
-                            <option>Bohemian</option>
-                            <option>Streetwear</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Color Preference:</label>
-                        <select>
-                            <option>All Colors</option>
-                            <option>Black</option>
-                            <option>White</option>
-                            <option>Blue</option>
-                            <option>Red</option>
-                            <option>Neutral Tones</option>
-                            <option>Bright Colors</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="search-button" onclick="searchBusinesses('clothes')">Find Clothing Stores Near Me</button>
         </div>
 
-        <div class="detailed-category" id="toysCategory">
-            <button class="back-button" onclick="goBack()">← Back to Categories</button>
-            <div class="category-header">
-                <div class="category-icon">🧸</div>
-                <div class="category-title">Toys & Games</div>
-            </div>
-
-            <div class="location-section">
-                <div class="location-input">
-                    <input type="text" id="toysLocationInput" placeholder="Enter your city, state or ZIP code">
-                    <button class="location-btn" onclick="setLocation('toys')">Set Location</button>
-                </div>
-            </div>
-
-            <div class="price-range-section">
-                <div class="price-range-title">Price Range per Item</div>
-                <input type="range" class="price-slider" min="5" max="200" value="50" 
-                       oninput="updatePriceRange('toys', this.value)">
-                <div class="price-display">$5 - $<span id="toysCurrent">50</span></div>
-            </div>
-
-            <div class="subcategories-section">
-                <div class="section-title">What type of toys?</div>
-                <div class="subcategory-grid">
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'educational')">Educational</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'outdoor')">Outdoor Play</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'puzzles')">Puzzles</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'building')">Building Sets</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'dolls')">Dolls & Figures</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'games')">Board Games</div>
-                </div>
-            </div>
-
-            <div class="filters-section" id="toysFilters">
-                <div class="section-title">Additional Filters</div>
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label>Age Range:</label>
-                        <select>
-                            <option>All Ages</option>
-                            <option>0-2 years (Infant/Toddler)</option>
-                            <option>3-5 years (Preschool)</option>
-                            <option>6-8 years (Early Elementary)</option>
-                            <option>9-12 years (Late Elementary)</option>
-                            <option>13+ years (Teen/Adult)</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Category:</label>
-                        <select>
-                            <option>All Categories</option>
-                            <option>STEM/Learning</option>
-                            <option>Creative Arts</option>
-                            <option>Active Play</option>
-                            <option>Electronic</option>
-                            <option>Imaginative Play</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Safety Features:</label>
-                        <select>
-                            <option>All Safety Levels</option>
-                            <option>Non-Toxic Materials</option>
-                            <option>No Small Parts</option>
-                            <option>Organic/Natural</option>
-                            <option>Safety Certified</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="search-button" onclick="searchBusinesses('toys')">Find Toy Stores Near Me</button>
+        <div class="price-range-section">
+            <div class="price-range-title">💰 Price Range per Item</div>
+            <input type="range" class="price-slider" min="10" max="800" value="150" 
+                   oninput="updatePriceRange('fashion', this.value)">
+            <div class="price-display">$10 - $<span id="fashionCurrent">150</span></div>
         </div>
 
-        <div class="detailed-category" id="generalCategory">
-            <button class="back-button" onclick="goBack()">← Back to Categories</button>
-            <div class="category-header">
-                <div class="category-icon">🛍</div>
-                <div class="category-title">General Shopping</div>
+        <div class="subcategories-section">
+            <div class="section-title">👕 What type of clothing?</div>
+            <div class="subcategory-grid">
+                <div class="subcategory-btn" onclick="selectSubcategory('fashion', 'shirts')">Shirts & Tops</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('fashion', 'pants')">Pants & Jeans</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('fashion', 'dresses')">Dresses</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('fashion', 'shoes')">Shoes</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('fashion', 'accessories')">Accessories</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('fashion', 'outerwear')">Jackets & Coats</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('fashion', 'jewelry')">Jewelry</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('fashion', 'bags')">Bags & Purses</div>
             </div>
-
-            <div class="location-section">
-                <div class="location-input">
-                    <input type="text" id="generalLocationInput" placeholder="Enter your city, state or ZIP code">
-                    <button class="location-btn" onclick="setLocation('general')">Set Location</button>
-                </div>
-            </div>
-
-            <div class="price-range-section">
-                <div class="price-range-title">Price Range per Item</div>
-                <input type="range" class="price-slider" min="1" max="1000" value="100" 
-                       oninput="updatePriceRange('general', this.value)">
-                <div class="price-display">$1 - $<span id="generalCurrent">100</span></div>
-            </div>
-
-            <div class="subcategories-section">
-                <div class="section-title">What are you shopping for?</div>
-                <div class="subcategory-grid">
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'electronics')">Electronics</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'home')">Home & Garden</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'books')">Books & Media</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'health')">Health & Beauty</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'sports')">Sports & Outdoors</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'automotive')">Automotive</div>
-                </div>
-            </div>
-
-            <div class="filters-section" id="generalFilters">
-                <div class="section-title">Additional Filters</div>
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label>Brand Preference:</label>
-                        <select>
-                            <option>All Brands</option>
-                            <option>Local Brands</option>
-                            <option>Independent Makers</option>
-                            <option>Eco-Friendly</option>
-                            <option>Handmade/Artisan</option>
-                            <option>Fair Trade</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Business Size:</label>
-                        <select>
-                            <option>All Business Types</option>
-                            <option>Local/Independent</option>
-                            <option>Regional Chain</option>
-                            <option>Family Owned</option>
-                            <option>Co-operative</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Shopping Method:</label>
-                        <select>
-                            <option>All Methods</option>
-                            <option>In-Store Only</option>
-                            <option>Online Available</option>
-                            <option>Curbside Pickup</option>
-                            <option>Local Delivery</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="search-button" onclick="searchBusinesses('general')">Find Local Stores Near Me</button>
         </div>
 
-        <div class="results-section" id="resultsSection">
+        <div class="filters-section" id="fashionFilters">
+            <div class="section-title">🔍 Additional Filters</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Size Range:</label>
+                    <select>
+                        <option>All Sizes</option>
+                        <option>XS - S</option>
+                        <option>M - L</option>
+                        <option>XL - XXL</option>
+                        <option>Plus Size (3X+)</option>
+                        <option>Petite</option>
+                        <option>Tall</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Style:</label>
+                    <select>
+                        <option>All Styles</option>
+                        <option>Casual</option>
+                        <option>Formal/Business</option>
+                        <option>Vintage/Retro</option>
+                        <option>Athletic/Sporty</option>
+                        <option>Bohemian</option>
+                        <option>Streetwear</option>
+                        <option>Designer</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Gender:</label>
+                    <select>
+                        <option>All</option>
+                        <option>Women's</option>
+                        <option>Men's</option>
+                        <option>Unisex</option>
+                        <option>Kids</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="search-button" onclick="searchBusinesses('fashion')">Find Fashion Stores Near Me</button>
+    </div>
+
+    <div class="detailed-category electronics" id="electronicsCategory">
+        <button class="back-button" onclick="goBack()">← Back to Categories</button>
+        <div class="category-header">
+            <div class="category-icon">📱</div>
+            <div class="category-title">Electronics & Tech</div>
+        </div>
+
+        <div class="location-section">
+            <div class="location-title">📍 Set Your Location</div>
+            <div class="location-input">
+                <input type="text" id="electronicsLocationInput" placeholder="Enter your city, state or ZIP code">
+                <button class="location-btn" onclick="setLocation('electronics')">Set Location</button>
+            </div>
+        </div>
+
+        <div class="price-range-section">
+            <div class="price-range-title">💰 Price Range per Item</div>
+            <input type="range" class="price-slider" min="20" max="2000" value="300" 
+                   oninput="updatePriceRange('electronics', this.value)">
+            <div class="price-display">$20 - $<span id="electronicsCurrent">300</span></div>
+        </div>
+
+        <div class="subcategories-section">
+            <div class="section-title">📱 What type of electronics?</div>
+            <div class="subcategory-grid">
+                <div class="subcategory-btn" onclick="selectSubcategory('electronics', 'phones')">Phones & Tablets</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('electronics', 'computers')">Computers</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('electronics', 'gaming')">Gaming</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('electronics', 'audio')">Audio & Headphones</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('electronics', 'cameras')">Cameras</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('electronics', 'accessories')">Accessories</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('electronics', 'smart')">Smart Home</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('electronics', 'repair')">Repair Services</div>
+            </div>
+        </div>
+
+        <div class="filters-section" id="electronicsFilters">
+            <div class="section-title">🔍 Additional Filters</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Brand Preference:</label>
+                    <select>
+                        <option>All Brands</option>
+                        <option>Apple</option>
+                        <option>Samsung</option>
+                        <option>Google</option>
+                        <option>Microsoft</option>
+                        <option>Sony</option>
+                        <option>Local Brands</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Condition:</label>
+                    <select>
+                        <option>All Conditions</option>
+                        <option>New</option>
+                        <option>Refurbished</option>
+                        <option>Used</option>
+                        <option>Open Box</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Service Type:</label>
+                    <select>
+                        <option>All Services</option>
+                        <option>Sales Only</option>
+                        <option>Repair Services</option>
+                        <option>Trade-In Available</option>
+                        <option>Installation</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="search-button" onclick="searchBusinesses('electronics')">Find Electronics Stores Near Me</button>
+    </div>
+
+    <div class="detailed-category home" id="homeCategory">
+        <button class="back-button" onclick="goBack()">← Back to Categories</button>
+        <div class="category-header">
+            <div class="category-icon">🏠</div>
+            <div class="category-title">Home & Garden</div>
+        </div>
+
+        <div class="location-section">
+            <div class="location-title">📍 Set Your Location</div>
+            <div class="location-input">
+                <input type="text" id="homeLocationInput" placeholder="Enter your city, state or ZIP code">
+                <button class="location-btn" onclick="setLocation('home')">Set Location</button>
+            </div>
+        </div>
+
+        <div class="price-range-section">
+            <div class="price-range-title">💰 Price Range per Item</div>
+            <input type="range" class="price-slider" min="15" max="5000" value="200" 
+                   oninput="updatePriceRange('home', this.value)">
+            <div class="price-display">$15 - $<span id="homeCurrent">200</span></div>
+        </div>
+
+        <div class="subcategories-section">
+            <div class="section-title">🏠 What are you shopping for?</div>
+            <div class="subcategory-grid">
+                <div class="subcategory-btn" onclick="selectSubcategory('home', 'furniture')">Furniture</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('home', 'decor')">Home Decor</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('home', 'kitchen')">Kitchen & Dining</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('home', 'garden')">Garden & Plants</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('home', 'tools')">Tools & Hardware</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('home', 'lighting')">Lighting</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('home', 'bedding')">Bedding & Bath</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('home', 'storage')">Storage & Organization</div>
+            </div>
+        </div>
+
+        <div class="filters-section" id="homeFilters">
+            <div class="section-title">🔍 Additional Filters</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Room:</label>
+                    <select>
+                        <option>All Rooms</option>
+                        <option>Living Room</option>
+                        <option>Bedroom</option>
+                        <option>Kitchen</option>
+                        <option>Bathroom</option>
+                        <option>Outdoor</option>
+                        <option>Office</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Style:</label>
+                    <select>
+                        <option>All Styles</option>
+                        <option>Modern</option>
+                        <option>Traditional</option>
+                        <option>Rustic</option>
+                        <option>Industrial</option>
+                        <option>Minimalist</option>
+                        <option>Vintage</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Material:</label>
+                    <select>
+                        <option>All Materials</option>
+                        <option>Wood</option>
+                        <option>Metal</option>
+                        <option>Glass</option>
+                        <option>Fabric</option>
+                        <option>Eco-Friendly</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="search-button" onclick="searchBusinesses('home')">Find Home & Garden Stores Near Me</button>
+    </div>
+
+    <div class="detailed-category health" id="healthCategory">
+        <button class="back-button" onclick="goBack()">← Back to Categories</button>
+        <div class="category-header">
+            <div class="category-icon">💊</div>
+            <div class="category-title">Health & Wellness</div>
+        </div>
+
+        <div class="location-section">
+            <div class="location-title">📍 Set Your Location</div>
+            <div class="location-input">
+                <input type="text" id="healthLocationInput" placeholder="Enter your city, state or ZIP code">
+                <button class="location-btn" onclick="setLocation('health')">Set Location</button>
+            </div>
+        </div>
+
+        <div class="price-range-section">
+            <div class="price-range-title">💰 Price Range per Item</div>
+            <input type="range" class="price-slider" min="5" max="500" value="75" 
+                   oninput="updatePriceRange('health', this.value)">
+            <div class="price-display">$5 - $<span id="healthCurrent">75</span></div>
+        </div>
+
+        <div class="subcategories-section">
+            <div class="section-title">💊 What are you looking for?</div>
+            <div class="subcategory-grid">
+                <div class="subcategory-btn" onclick="selectSubcategory('health', 'pharmacy')">Pharmacy</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('health', 'vitamins')">Vitamins & Supplements</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('health', 'beauty')">Beauty & Skincare</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('health', 'fitness')">Fitness Equipment</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('health', 'natural')">Natural Health</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('health', 'personal')">Personal Care</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('health', 'wellness')">Wellness Centers</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('health', 'medical')">Medical Supplies</div>
+            </div>
+        </div>
+
+        <div class="filters-section" id="healthFilters">
+            <div class="section-title">🔍 Additional Filters</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Specialty:</label>
+                    <select>
+                        <option>All Specialties</option>
+                        <option>Organic/Natural</option>
+                        <option>Sports Nutrition</option>
+                        <option>Senior Care</option>
+                        <option>Baby Care</option>
+                        <option>Men's Health</option>
+                        <option>Women's Health</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Service Type:</label>
+                    <select>
+                        <option>All Services</option>
+                        <option>Consultation Available</option>
+                        <option>Prescription Services</option>
+                        <option>Home Delivery</option>
+                        <option>Insurance Accepted</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Product Type:</label>
+                    <select>
+                        <option>All Products</option>
+                        <option>Over-the-Counter</option>
+                        <option>Prescription</option>
+                        <option>Herbal Remedies</option>
+                        <option>Equipment/Devices</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="search-button" onclick="searchBusinesses('health')">Find Health & Wellness Stores Near Me</button>
+    </div>
+
+    <div class="detailed-category automotive" id="automotiveCategory">
+        <button class="back-button" onclick="goBack()">← Back to Categories</button>
+        <div class="category-header">
+            <div class="category-icon">🚗</div>
+            <div class="category-title">Automotive</div>
+        </div>
+
+        <div class="location-section">
+            <div class="location-title">📍 Set Your Location</div>
+            <div class="location-input">
+                <input type="text" id="automotiveLocationInput" placeholder="Enter your city, state or ZIP code">
+                <button class="location-btn" onclick="setLocation('automotive')">Set Location</button>
+            </div>
+        </div>
+
+        <div class="price-range-section">
+            <div class="price-range-title">💰 Price Range per Item</div>
+            <input type="range" class="price-slider" min="25" max="1500" value="200" 
+                   oninput="updatePriceRange('automotive', this.value)">
+            <div class="price-display">$25 - $<span id="automotiveCurrent">200</span></div>
+        </div>
+
+        <div class="subcategories-section">
+            <div class="section-title">🚗 What do you need?</div>
+            <div class="subcategory-grid">
+                <div class="subcategory-btn" onclick="selectSubcategory('automotive', 'parts')">Auto Parts</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('automotive', 'accessories')">Car Accessories</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('automotive', 'tires')">Tires</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('automotive', 'maintenance')">Maintenance Items</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('automotive', 'audio')">Car Audio</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('automotive', 'tools')">Tools & Equipment</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('automotive', 'motorcycle')">Motorcycle Gear</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('automotive', 'detailing')">Detailing Supplies</div>
+            </div>
+        </div>
+
+        <div class="filters-section" id="automotiveFilters">
+            <div class="section-title">🔍 Additional Filters</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Vehicle Type:</label>
+                    <select>
+                        <option>All Vehicles</option>
+                        <option>Cars</option>
+                        <option>Trucks</option>
+                        <option>SUVs</option>
+                        <option>Motorcycles</option>
+                        <option>RVs</option>
+                        <option>Classic Cars</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Part Type:</label>
+                    <select>
+                        <option>All Parts</option>
+                        <option>OEM Original</option>
+                        <option>Aftermarket</option>
+                        <option>Performance</option>
+                        <option>Used/Refurbished</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Service Available:</label>
+                    <select>
+                        <option>All Services</option>
+                        <option>Installation</option>
+                        <option>Repair</option>
+                        <option>Consultation</option>
+                        <option>Parts Ordering</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="search-button" onclick="searchBusinesses('automotive')">Find Automotive Stores Near Me</button>
+    </div>
+
+    <div class="detailed-category entertainment" id="entertainmentCategory">
+        <button class="back-button" onclick="goBack()">← Back to Categories</button>
+        <div class="category-header">
+            <div class="category-icon">🎮</div>
+            <div class="category-title">Entertainment & Hobbies</div>
+        </div>
+
+        <div class="location-section">
+            <div class="location-title">📍 Set Your Location</div>
+            <div class="location-input">
+                <input type="text" id="entertainmentLocationInput" placeholder="Enter your city, state or ZIP code">
+                <button class="location-btn" onclick="setLocation('entertainment')">Set Location</button>
+            </div>
+        </div>
+
+        <div class="price-range-section">
+            <div class="price-range-title">💰 Price Range per Item</div>
+            <input type="range" class="price-slider" min="10" max="400" value="75" 
+                   oninput="updatePriceRange('entertainment', this.value)">
+            <div class="price-display">$10 - $<span id="entertainmentCurrent">75</span></div>
+        </div>
+
+        <div class="subcategories-section">
+            <div class="section-title">🎮 What interests you?</div>
+            <div class="subcategory-grid">
+                <div class="subcategory-btn" onclick="selectSubcategory('entertainment', 'toys')">Toys</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('entertainment', 'games')">Board Games</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('entertainment', 'books')">Books</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('entertainment', 'music')">Music & Instruments</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('entertainment', 'sports')">Sports Equipment</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('entertainment', 'crafts')">Arts & Crafts</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('entertainment', 'puzzles')">Puzzles</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('entertainment', 'collectibles')">Collectibles</div>
+            </div>
+        </div>
+
+        <div class="filters-section" id="entertainmentFilters">
+            <div class="section-title">🔍 Additional Filters</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Age Range:</label>
+                    <select>
+                        <option>All Ages</option>
+                        <option>0-2 years (Infant/Toddler)</option>
+                        <option>3-5 years (Preschool)</option>
+                        <option>6-8 years (Early Elementary)</option>
+                        <option>9-12 years (Late Elementary)</option>
+                        <option>13-17 years (Teen)</option>
+                        <option>18+ years (Adult)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <select>
+                        <option>All Categories</option>
+                        <option>Educational/STEM</option>
+                        <option>Creative Arts</option>
+                        <option>Active Play</option>
+                        <option>Electronic</option>
+                        <option>Imaginative Play</option>
+                        <option>Strategy Games</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Player Count:</label>
+                    <select>
+                        <option>All Player Counts</option>
+                        <option>Single Player</option>
+                        <option>2 Players</option>
+                        <option>3-4 Players</option>
+                        <option>5+ Players</option>
+                        <option>Family Games</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="search-button" onclick="searchBusinesses('entertainment')">Find Entertainment Stores Near Me</button>
+    </div>
+
+    <div class="detailed-category services" id="servicesCategory">
+        <button class="back-button" onclick="goBack()">← Back to Categories</button>
+        <div class="category-header">
+            <div class="category-icon">🔧</div>
+            <div class="category-title">Services & Professional</div>
+        </div>
+
+        <div class="location-section">
+            <div class="location-title">📍 Set Your Location</div>
+            <div class="location-input">
+                <input type="text" id="servicesLocationInput" placeholder="Enter your city, state or ZIP code">
+                <button class="location-btn" onclick="setLocation('services')">Set Location</button>
+            </div>
+        </div>
+
+        <div class="price-range-section">
+            <div class="price-range-title">💰 Price Range per Service</div>
+            <input type="range" class="price-slider" min="30" max="1000" value="150" 
+                   oninput="updatePriceRange('services', this.value)">
+            <div class="price-display">$30 - $<span id="servicesCurrent">150</span></div>
+        </div>
+
+        <div class="subcategories-section">
+            <div class="section-title">🔧 What service do you need?</div>
+            <div class="subcategory-grid">
+                <div class="subcategory-btn" onclick="selectSubcategory('services', 'repair')">Repair Services</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('services', 'cleaning')">Cleaning Services</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('services', 'professional')">Professional Services</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('services', 'maintenance')">Maintenance</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('services', 'installation')">Installation</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('services', 'consulting')">Consulting</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('services', 'personal')">Personal Services</div>
+                <div class="subcategory-btn" onclick="selectSubcategory('services', 'pet')">Pet Services</div>
+            </div>
+        </div>
+
+        <div class="filters-section" id="servicesFilters">
+            <div class="section-title">🔍 Additional Filters</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Service Type:</label>
+                    <select>
+                        <option>All Service Types</option>
+                        <option>Emergency Available</option>
+                        <option>Same Day Service</option>
+                        <option>Scheduled Appointments</option>
+                        <option>Mobile Service</option>
+                        <option>In-Home Service</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Business Size:</label>
+                    <select>
+                        <option>All Business Sizes</option>
+                        <option>Local/Independent</option>
+                        <option>Family Owned</option>
+                        <option>Licensed/Certified</option>
+                        <option>Insured</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Availability:</label>
+                    <select>
+                        <option>All Hours</option>
+                        <option>24/7 Available</option>
+                        <option>Weekends</option>
+                        <option>Evenings</option>
+                        <option>Business Hours Only</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="search-button" onclick="searchBusinesses('services')">Find Service Providers Near Me</button>
+    </div>
+
+    <div class="results-section" id="resultsSection">
+        <div class="results-header">
             <h2>Local Businesses Near You</h2>
-            <div id="businessResults">
-                <!-- Results will be populated here -->
-            </div>
+            <div class="results-count" id="resultsCount">Found amazing local businesses in your area</div>
         </div>
+        <div id="businessResults">
+            <!-- Results will be populated here -->
+        </div>
+    </div>
 
-        <div class="newsletter-section">
-            <h3>Get Sale Notifications</h3>
-            <p>Stay updated with local deals and promotions from businesses in your area</p>
-            <div class="newsletter-form">
-                <input type="email" placeholder="Enter your email address" id="emailInput">
-                <button onclick="subscribeNewsletter()">Subscribe for Deals</button>
-            </div> <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocalFind - Shop Local, Support Community</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <div class="newsletter-section">
+        <h3>Get Local Deal Notifications</h3>
+        <p>Stay updated with exclusive deals and promotions from local businesses in your area</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" id="emailInput">
+            <button onclick="subscribeNewsletter()">Subscribe for Deals</button>
+        </div>
+    </div>
+</div>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
+<script>
+    let currentLocation = '';
+    let activeCategory = '';
+    let activeSubcategory = '';
+    let selectedFilters = {};
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-        }
-
-        .header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-
-        .header .subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        /* Initial Category Selection */
-        .category-selection {
-            display: block;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .main-category {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 3px solid transparent;
-        }
-
-        .main-category:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            border-color: #667eea;
-        }
-
-        .main-category.selected {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
-        }
-
-        .category-icon-large {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 2.5rem;
-        }
-
-        .category-title-large {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .category-description {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        /* Detailed Category View */
-        .detailed-category {
-            display: none;
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .back-button {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 30px;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-        }
-
-        .back-button:hover {
-            background: #5a6268;
-            transform: translateY(-1px);
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .category-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            color: white;
-            font-size: 1.8rem;
-        }
-
-        .category-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #333;
-        }
-
-        .location-section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .location-input {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .location-input input {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            min-width: 250px;
-        }
-
-        .location-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .location-btn:hover {
-            background: #5a67d8;
-            transform: translateY(-2px);
-        }
-
-        .price-range-section {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-
-        .price-range-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .price-slider {
-            width: 100%;
-            margin-bottom: 15px;
-            height: 8px;
-            background: #ddd;
-            border-radius: 5px;
-            outline: none;
-        }
-
-        .price-display {
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: #667eea;
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
-        }
-
-        .subcategories-section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .subcategory-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .subcategory-btn {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            padding: 15px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .subcategory-btn:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
-        }
-
-        .subcategory-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .filters-section {
-            display: none;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            margin-bottom: 25px;
-        }
-
-        .filters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .filter-group {
-            margin-bottom: 15px;
-        }
-
-        .filter-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        .filter-group select, .filter-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 0.95rem;
-        }
-
-        .search-button {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            width: 100%;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-        }
-
-        .search-button:hover {
-            background: #218838;
-            transform: translateY(-2px);
-        }
-
-        .results-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .business-card {
-            border: 2px solid #f0f0f0;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            transition: all 0.2s ease;
-        }
-
-        .business-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-color: #667eea;
-        }
-
-        .business-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .business-type {
-            background: #667eea;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .business-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .info-item {
-            font-size: 0.95rem;
-            color: #666;
-        }
-
-        .info-item strong {
-            color: #333;
-        }
-
-        .business-link {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .business-link:hover {
-            background: #218838;
-            transform: translateY(-1px);
-        }
-
-        .newsletter-section {
-            background: white;
-            border-radius: 15px;
-            padding: 35px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .newsletter-section h3 {
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 1.5rem;
-        }
-
-        .newsletter-section p {
-            margin-bottom: 25px;
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: 15px;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .newsletter-form button {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .newsletter-form button:hover {
-            background: #218838;
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5rem;
+    function selectMainCategory(category) {
+        // Hide category selection
+        document.getElementById('categorySelection').style.display = 'none';
+        
+        // Show selected category detail
+        document.getElementById(category + 'Category').style.display = 'block';
+        
+        activeCategory = category;
+        
+        // Initialize price slider background
+        setTimeout(() => {
+            const slider = document.querySelector(`#${category}Category .price-slider`);
+            if (slider) {
+                const percent = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+                slider.style.background = `linear-gradient(to right, var(--category-color) 0%, var(--category-color) ${percent}%, #e2e8f0 ${percent}%, #e2e8f0 100%)`;
             }
+        }, 100);
+    }
+
+    function goBack() {
+        // Hide all detailed categories
+        document.querySelectorAll('.detailed-category').forEach(cat => {
+            cat.style.display = 'none';
+        });
+        
+        // Hide results
+        document.getElementById('resultsSection').style.display = 'none';
+        
+        // Show category selection
+        document.getElementById('categorySelection').style.display = 'block';
+        
+        // Reset variables
+        activeCategory = '';
+        activeSubcategory = '';
+        currentLocation = '';
+    }
+
+    function setLocation(category) {
+        const locationInput = document.getElementById(category + 'LocationInput');
+        const location = locationInput.value.trim();
+        
+        if (location) {
+            currentLocation = location;
+            locationInput.style.borderColor = '#48bb78';
+            locationInput.style.boxShadow = '0 0 0 3px rgba(72, 187, 120, 0.2)';
             
-            .location-input, .newsletter-form {
-                flex-direction: column;
-            }
-            
-            .category-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .subcategory-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
+            setTimeout(() => {
+                locationInput.style.borderColor = '#e2e8f0';
+                locationInput.style.boxShadow = 'none';
+            }, 2000);
+        } else {
+            alert('Please enter a valid location');
         }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>LocalFind</h1>
-            <p>Discover local businesses and support your community</p>
-            <p class="subtitle">Choose a category below to start shopping local</p>
-        </div>
+    }
 
-        <!-- Main Category Selection Screen -->
-        <div class="category-selection" id="categorySelection">
-            <div class="category-grid">
-                <div class="main-category" onclick="selectMainCategory('food')">
-                    <div class="category-icon-large">🍽</div>
-                    <div class="category-title-large">Food & Dining</div>
-                    <div class="category-description">Restaurants, cafes, grocery stores, and local food producers</div>
+    function updatePriceRange(category, value) {
+        document.getElementById(category + 'Current').textContent = value;
+        
+        // Update slider background
+        const slider = document.querySelector(`#${category}Category .price-slider`);
+        const percent = (value - slider.min) / (slider.max - slider.min) * 100;
+        slider.style.background = `linear-gradient(to right, var(--category-color) 0%, var(--category-color) ${percent}%, #e2e8f0 ${percent}%, #e2e8f0 100%)`;
+    }
+
+    function selectSubcategory(category, subcategory) {
+        // Remove active class from all buttons in this category
+        const categoryButtons = document.querySelectorAll(`#${category}Category .subcategory-btn`);
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        event.target.classList.add('active');
+        
+        // Show filters section
+        document.getElementById(category + 'Filters').style.display = 'block';
+        
+        activeSubcategory = subcategory;
+    }
+
+    function searchBusinesses(category) {
+        if (!currentLocation) {
+            alert('Please enter your location first');
+            return;
+        }
+
+        // Show results section
+        document.getElementById('resultsSection').style.display = 'block';
+        
+        // Generate sample results based on category
+        const businessResults = document.getElementById('businessResults');
+        const sampleBusinesses = getSampleBusinesses(category);
+        
+        // Update results count
+        document.getElementById('resultsCount').textContent = `Found ${sampleBusinesses.length} local businesses in ${currentLocation}`;
+        
+        businessResults.innerHTML = sampleBusinesses.map(business => `
+            <div class="business-card">
+                <div class="business-name">${business.name}</div>
+                <div class="business-type">${business.type}</div>
+                <div class="business-info">
+                    <div class="info-item">📍 <strong>Address:</strong> ${business.address}</div>
+                    <div class="info-item">📞 <strong>Phone:</strong> ${business.phone}</div>
+                    <div class="info-item">🕒 <strong>Hours:</strong> ${business.hours}</div>
+                    <div class="info-item">⭐ <strong>Specialties:</strong> ${business.specialties}</div>
                 </div>
-
-                <div class="main-category" onclick="selectMainCategory('clothes')">
-                    <div class="category-icon-large">👕</div>
-                    <div class="category-title-large">Clothing & Fashion</div>
-                    <div class="category-description">Boutiques, thrift stores, shoes, accessories, and local designers</div>
-                </div>
-
-                <div class="main-category" onclick="selectMainCategory('toys')">
-                    <div class="category-icon-large">🧸</div>
-                    <div class="category-title-large">Toys & Games</div>
-                    <div class="category-description">Educational toys, games, puzzles, and specialty toy stores</div>
-                </div>
-
-                <div class="main-category" onclick="selectMainCategory('general')">
-                    <div class="category-icon-large">🛍</div>
-                    <div class="category-title-large">General Shopping</div>
-                    <div class="category-description">Electronics, books, home goods, hardware, and specialty items</div>
-                </div>
+                <a href="${business.website}" class="business-link" target="_blank">Visit Website</a>
             </div>
-        </div>
+        `).join('');
 
-        <!-- Detailed Category Views -->
-        <div class="detailed-category" id="foodCategory">
-            <button class="back-button" onclick="goBack()">← Back to Categories</button>
-            <div class="category-header">
-                <div class="category-icon">🍽</div>
-                <div class="category-title">Food & Dining</div>
-            </div>
+        // Scroll to results
+        document.getElementById('resultsSection').scrollIntoView({ 
+            behavior: 'smooth' 
+        });
+    }
 
-            <div class="location-section">
-                <div class="location-input">
-                    <input type="text" id="foodLocationInput" placeholder="Enter your city, state or ZIP code">
-                    <button class="location-btn" onclick="setLocation('food')">Set Location</button>
-                </div>
-            </div>
+    function getSampleBusinesses(category) {
+        const businessData = {
+            food: [
+                {
+                    name: "Maria's Authentic Taco Kitchen",
+                    type: "Family Restaurant",
+                    address: "123 Main St, " + currentLocation,
+                    phone: "(555) 123-4567",
+                    website: "https://marias-tacos.com",
+                    hours: "11AM - 9PM Daily",
+                    specialties: "Handmade tortillas, fresh guacamole, vegan options"
+                },
+                {
+                    name: "Green Valley Organic Market",
+                    type: "Local Grocer",
+                    address: "456 Oak Avenue, " + currentLocation,
+                    phone: "(555) 234-5678",
+                    website: "https://greenvalleymarket.com",
+                    hours: "7AM - 9PM Daily",
+                    specialties: "Organic produce, local dairy, zero waste options"
+                },
+                {
+                    name: "The Daily Grind Coffee Co.",
+                    type: "Independent Coffee Shop",
+                    address: "789 Elm Street, " + currentLocation,
+                    phone: "(555) 345-6789",
+                    website: "https://dailygrindcoffee.com",
+                    hours: "6AM - 8PM Mon-Sat, 7AM - 6PM Sun",
+                    specialties: "Locally roasted beans, homemade pastries, study space"
+                },
+                {
+                    name: "Sunshine Artisan Bakery",
+                    type: "Local Bakery",
+                    address: "321 Pine Road, " + currentLocation,
+                    phone: "(555) 456-7890",
+                    website: "https://sunshinebakery.com",
+                    hours: "6AM - 4PM Daily",
+                    specialties: "Sourdough bread, custom cakes, gluten-free options"
+                }
+            ],
+            fashion: [
+                {
+                    name: "Threads & Co. Boutique",
+                    type: "Local Fashion",
+                    address: "789 Fashion Boulevard, " + currentLocation,
+                    phone: "(555) 345-6789",
+                    website: "https://threadsandco.com",
+                    hours: "10AM - 8PM Mon-Sat, 12PM - 6PM Sun",
+                    specialties: "Sustainable fashion, local designers, size XS-4XL"
+                },
+                {
+                    name: "Vintage Revival Collective",
+                    type: "Vintage Store",
+                    address: "321 Retro Road, " + currentLocation,
+                    phone: "(555) 456-7890",
+                    website: "https://vintagerevival.com",
+                    hours: "11AM - 7PM Daily",
+                    specialties: "Curated vintage, designer pieces, accessories"
+                },
+                {
+                    name: "Comfort Walk Shoes",
+                    type: "Family Shoe Store",
+                    address: "654 Walker Street, " + currentLocation,
+                    phone: "(555) 567-8901",
+                    website: "https://comfortwalk.com",
+                    hours: "10AM - 6PM Mon-Sat",
+                    specialties: "Comfortable footwear, wide sizes, professional fitting"
+                },
+                {
+                    name: "Urban Threads Custom Tailoring",
+                    type: "Custom Clothing",
+                    address: "987 Stitch Lane, " + currentLocation,
+                    phone: "(555) 678-9012",
+                    website: "https://urbanthreads.com",
+                    hours: "9AM - 5PM Mon-Fri, 10AM - 2PM Sat",
+                    specialties: "Custom suits, alterations, formal wear, wedding attire"
+                }
+            ],
+            electronics: [
+                {
+                    name: "Tech Solutions Plus",
+                    type: "Local Electronics",
+                    address: "369 Digital Drive, " + currentLocation,
+                    phone: "(555) 901-2345",
+                    website: "https://techsolutionsplus.com",
+                    hours: "10AM - 8PM Mon-Sat, 12PM - 6PM Sun",
+                    specialties: "Computer repair, gaming setups, phone accessories"
+                },
+                {
+                    name: "Gadget Galaxy",
+                    type: "Independent Tech Store",
+                    address: "741 Innovation Way, " + currentLocation,
+                    phone: "(555) 012-3456",
+                    website: "https://gadgetgalaxy.com",
+                    hours: "9AM - 7PM Daily",
+                    specialties: "Latest gadgets, smart home, professional audio"
+                },
+                {
+                    name: "Retro Gaming Corner",
+                    type: "Gaming Specialty",
+                    address: "852 Pixel Plaza, " + currentLocation,
+                    phone: "(555) 123-4567",
+                    website: "https://retrogamingcorner.com",
+                    hours: "12PM - 9PM Daily",
+                    specialties: "Vintage games, modern consoles, game repair"
+                }
+            ],
+            home: [
+                {
+                    name: "Hometown Hardware & More",
+                    type: "Local Hardware",
+                    address: "147 Center Street, " + currentLocation,
+                    phone: "(555) 789-0123",
+                    website: "https://hometownhardware.com",
+                    hours: "7AM - 7PM Mon-Sat, 9AM - 5PM Sun",
+                    specialties: "Tools, garden supplies, key cutting, paint mixing"
+                },
+                {
+                    name: "Cozy Home Furnishings",
+                    type: "Local Furniture",
+                    address: "258 Comfort Court, " + currentLocation,
+                    phone: "(555) 890-1234",
+                    website: "https://cozyhomefurn.com",
+                    hours: "10AM - 7PM Mon-Sat, 12PM - 5PM Sun",
+                    specialties: "Handcrafted furniture, local artisans, custom pieces"
+                },
+                {
+                    name: "Garden Paradise Nursery",
+                    type: "Local Garden Center",
+                    address: "369 Green Thumb Lane, " + currentLocation,
+                    phone: "(555) 901-2345",
+                    website: "https://gardenparadise.com",
+                    hours: "8AM - 6PM Daily",
+                    specialties: "Native plants, landscaping, organic fertilizers"
+                }
+            ],
+            health: [
+                {
+                    name: "Natural Health & Wellness",
+                    type: "Health Store",
+                    address: "741 Wellness Way, " + currentLocation,
+                    phone: "(555) 012-3456",
+                    website: "https://naturalhealthwellness.com",
+                    hours: "9AM - 7PM Mon-Sat, 11AM - 5PM Sun",
+                    specialties: "Organic supplements, natural remedies, health consultations"
+                },
+                {
+                    name: "Beauty & Beyond Boutique",
+                    type: "Beauty Store",
+                    address: "852 Glow Street, " + currentLocation,
+                    phone: "(555) 123-4567",
+                    website: "https://beautybeyond.com",
+                    hours: "10AM - 8PM Daily",
+                    specialties: "Cruelty-free cosmetics, skincare, professional makeup"
+                },
+                {
+                    name: "Community Pharmacy Plus",
+                    type: "Local Pharmacy",
+                    address: "963 Care Avenue, " + currentLocation,
+                    phone: "(555) 234-5678",
+                    website: "https://communitypharmacy.com",
+                    hours: "8AM - 9PM Mon-Sat, 9AM - 6PM Sun",
+                    specialties: "Personal service, compounding, health screenings"
+                }
+            ],
+            automotive: [
+                {
+                    name: "Auto Pro Parts & Service",
+                    type: "Auto Parts Store",
+                    address: "147 Motor Mile, " + currentLocation,
+                    phone: "(555) 345-6789",
+                    website: "https://autoproparts.com",
+                    hours: "7AM - 7PM Mon-Sat, 9AM - 5PM Sun",
+                    specialties: "Quality parts, installation service, tool rental"
+                },
+                {
+                    name: "Tire & Wheel Specialists",
+                    type: "Tire Shop",
+                    address: "258 Rolling Road, " + currentLocation,
+                    phone: "(555) 456-7890",
+                    website: "https://tirewheelspec.com",
+                    hours: "8AM - 6PM Mon-Sat",
+                    specialties: "All tire brands, wheel alignment, road hazard warranty"
+                },
+                {
+                    name: "Classic Car Garage",
+                    type: "Specialty Auto",
+                    address: "369 Vintage Drive, " + currentLocation,
+                    phone: "(555) 567-8901",
+                    website: "https://classiccargarage.com",
+                    hours: "9AM - 5PM Mon-Fri",
+                    specialties: "Classic car parts, restoration, vintage accessories"
+                }
+            ],
+            entertainment: [
+                {
+                    name: "Wonder World Toy Emporium",
+                    type: "Toy Store",
+                    address: "654 Play Street, " + currentLocation,
+                    phone: "(555) 567-8901",
+                    website: "https://wonderworldtoys.com",
+                    hours: "9AM - 8PM Daily",
+                    specialties: "Educational toys, STEM kits, birthday parties"
+                },
+                {
+                    name: "The Book Haven",
+                    type: "Independent Bookstore",
+                    address: "741 Story Lane, " + currentLocation,
+                    phone: "(555) 678-9012",
+                    website: "https://bookhaven.com",
+                    hours: "9AM - 9PM Daily",
+                    specialties: "New releases, local authors, reading events"
+                },
+                {
+                    name: "Game On! Board Game Cafe",
+                    type: "Gaming Store",
+                    address: "852 Strategy Street, " + currentLocation,
+                    phone: "(555) 789-0123",
+                    website: "https://gameon-cafe.com",
+                    hours: "2PM - 10PM Daily",
+                    specialties: "Board games, tournaments, gaming groups"
+                },
+                {
+                    name: "Music & More Instruments",
+                    type: "Music Store",
+                    address: "963 Melody Avenue, " + currentLocation,
+                    phone: "(555) 890-1234",
+                    website: "https://musicandmore.com",
+                    hours: "10AM - 7PM Mon-Sat, 12PM - 5PM Sun",
+                    specialties: "Instruments, lessons, repairs, sheet music"
+                }
+            ],
+            services: [
+                {
+                    name: "Handy Helper Home Services",
+                    type: "Home Services",
+                    address: "147 Fix-It Road, " + currentLocation,
+                    phone: "(555) 901-2345",
+                    website: "https://handyhelper.com",
+                    hours: "8AM - 6PM Mon-Sat",
+                    specialties: "Home repairs, installations, maintenance, emergency service"
+                },
+                {
+                    name: "Sparkle Clean Professional",
+                    type: "Cleaning Service",
+                    address: "258 Fresh Street, " + currentLocation,
+                    phone: "(555) 012-3456",
+                    website: "https://sparkleclean.com",
+                    hours: "7AM - 7PM Mon-Fri, 9AM - 5PM Sat",
+                    specialties: "Residential cleaning, commercial, eco-friendly products"
+                },
+                {
+                    name: "Tech Support Solutions",
+                    type: "IT Services",
+                    address: "369 Digital Drive, " + currentLocation,
+                    phone: "(555) 123-4567",
+                    website: "https://techsupportsolutions.com",
+                    hours: "9AM - 6PM Mon-Fri",
+                    specialties: "Computer repair, network setup, data recovery"
+                },
+                {
+                    name: "Pampered Pets Grooming",
+                    type: "Pet Services",
+                    address: "741 Paw Print Lane, " + currentLocation,
+                    phone: "(555) 234-5678",
+                    website: "https://pamperedpets.com",
+                    hours: "8AM - 5PM Tue-Sat",
+                    specialties: "Pet grooming, nail trimming, pet supplies"
+                }
+            ]
+        };
 
-            <div class="price-range-section">
-                <div class="price-range-title">Price Range per Item/Meal</div>
-                <input type="range" class="price-slider" min="5" max="100" value="50" 
-                       oninput="updatePriceRange('food', this.value)">
-                <div class="price-display">$5 - $<span id="foodCurrent">50</span></div>
-            </div>
+        return businessData[category] || [];
+    }
 
-            <div class="subcategories-section">
-                <div class="section-title">What are you looking for?</div>
-                <div class="subcategory-grid">
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'breakfast')">Breakfast</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'lunch')">Lunch</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'dinner')">Dinner</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'dessert')">Dessert</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'coffee')">Coffee & Drinks</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('food', 'groceries')">Groceries</div>
-                </div>
-            </div>
+    function subscribeNewsletter() {
+        const email = document.getElementById('emailInput').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!email) {
+            alert('Please enter your email address');
+            return;
+        }
+        
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
 
-            <div class="filters-section" id="foodFilters">
-                <div class="section-title">Additional Filters</div>
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label>Cuisine Type:</label>
-                        <select>
-                            <option>All Cuisines</option>
-                            <option>American</option>
-                            <option>Italian</option>
-                            <option>Mexican</option>
-                            <option>Asian</option>
-                            <option>Mediterranean</option>
-                            <option>Indian</option>
-                            <option>French</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Dietary Options:</label>
-                        <select>
-                            <option>All Options</option>
-                            <option>Vegetarian</option>
-                            <option>Vegan</option>
-                            <option>Gluten-Free</option>
-                            <option>Keto-Friendly</option>
-                            <option>Organic</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Business Type:</label>
-                        <select>
-                            <option>All Types</option>
-                            <option>Local Only</option>
-                            <option>Regional Chain</option>
-                            <option>Family Owned</option>
-                            <option>Farm to Table</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+        const button = event.target;
+        const originalText = button.textContent;
+        button.textContent = '✓ Subscribed!';
+        button.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            document.getElementById('emailInput').value = '';
+        }, 3000);
+    }
 
-            <button class="search-button" onclick="searchBusinesses('food')">Find Food & Dining Near Me</button>
-        </div>
+    // Enhanced interactivity
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add enhanced hover effects
+        const mainCategories = document.querySelectorAll('.main-category');
+        mainCategories.forEach(category => {
+            category.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            category.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
 
-        <div class="detailed-category" id="clothesCategory">
-            <button class="back-button" onclick="goBack()">← Back to Categories</button>
-            <div class="category-header">
-                <div class="category-icon">👕</div>
-                <div class="category-title">Clothing & Fashion</div>
-            </div>
+        // Enhanced input interactions
+        const inputs = document.querySelectorAll('input[type="text"], input[type="email"], select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = 'var(--category-color, #48bb78)';
+                this.style.boxShadow = '0 0 0 3px rgba(72, 187, 120, 0.1)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.borderColor = '#e2e8f0';
+                this.style.boxShadow = 'none';
+            });
+        });
 
-            <div class="location-section">
-                <div class="location-input">
-                    <input type="text" id="clothesLocationInput" placeholder="Enter your city, state or ZIP code">
-                    <button class="location-btn" onclick="setLocation('clothes')">Set Location</button>
-                </div>
-            </div>
+        // Enhanced button click effects
+        const buttons = document.querySelectorAll('button, .subcategory-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
 
-            <div class="price-range-section">
-                <div class="price-range-title">Price Range per Item</div>
-                <input type="range" class="price-slider" min="10" max="500" value="100" 
-                       oninput="updatePriceRange('clothes', this.value)">
-                <div class="price-display">$10 - $<span id="clothesCurrent">100</span></div>
-            </div>
+        // Initialize all price sliders
+        const sliders = document.querySelectorAll('.price-slider');
+        sliders.forEach(slider => {
+            const percent = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+            slider.style.background = `linear-gradient(to right, var(--category-color) 0%, var(--category-color) ${percent}%, #e2e8f0 ${percent}%, #e2e8f0 100%)`;
+        });
+    });
+</script>
+```
 
-            <div class="subcategories-section">
-                <div class="section-title">What type of clothing?</div>
-                <div class="subcategory-grid">
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'shirts')">Shirts & Tops</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'pants')">Pants & Jeans</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'dresses')">Dresses</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'shoes')">Shoes</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'accessories')">Accessories</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('clothes', 'outerwear')">Jackets & Coats</div>
-                </div>
-            </div>
-
-            <div class="filters-section" id="clothesFilters">
-                <div class="section-title">Additional Filters</div>
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label>Size Range:</label>
-                        <select>
-                            <option>All Sizes</option>
-                            <option>XS - S</option>
-                            <option>M - L</option>
-                            <option>XL - XXL</option>
-                            <option>Plus Size (3X+)</option>
-                            <option>Petite</option>
-                            <option>Tall</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Style:</label>
-                        <select>
-                            <option>All Styles</option>
-                            <option>Casual</option>
-                            <option>Formal/Business</option>
-                            <option>Vintage/Retro</option>
-                            <option>Athletic/Sporty</option>
-                            <option>Bohemian</option>
-                            <option>Streetwear</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Color Preference:</label>
-                        <select>
-                            <option>All Colors</option>
-                            <option>Black</option>
-                            <option>White</option>
-                            <option>Blue</option>
-                            <option>Red</option>
-                            <option>Neutral Tones</option>
-                            <option>Bright Colors</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="search-button" onclick="searchBusinesses('clothes')">Find Clothing Stores Near Me</button>
-        </div>
-
-        <div class="detailed-category" id="toysCategory">
-            <button class="back-button" onclick="goBack()">← Back to Categories</button>
-            <div class="category-header">
-                <div class="category-icon">🧸</div>
-                <div class="category-title">Toys & Games</div>
-            </div>
-
-            <div class="location-section">
-                <div class="location-input">
-                    <input type="text" id="toysLocationInput" placeholder="Enter your city, state or ZIP code">
-                    <button class="location-btn" onclick="setLocation('toys')">Set Location</button>
-                </div>
-            </div>
-
-            <div class="price-range-section">
-                <div class="price-range-title">Price Range per Item</div>
-                <input type="range" class="price-slider" min="5" max="200" value="50" 
-                       oninput="updatePriceRange('toys', this.value)">
-                <div class="price-display">$5 - $<span id="toysCurrent">50</span></div>
-            </div>
-
-            <div class="subcategories-section">
-                <div class="section-title">What type of toys?</div>
-                <div class="subcategory-grid">
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'educational')">Educational</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'outdoor')">Outdoor Play</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'puzzles')">Puzzles</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'building')">Building Sets</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'dolls')">Dolls & Figures</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('toys', 'games')">Board Games</div>
-                </div>
-            </div>
-
-            <div class="filters-section" id="toysFilters">
-                <div class="section-title">Additional Filters</div>
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label>Age Range:</label>
-                        <select>
-                            <option>All Ages</option>
-                            <option>0-2 years (Infant/Toddler)</option>
-                            <option>3-5 years (Preschool)</option>
-                            <option>6-8 years (Early Elementary)</option>
-                            <option>9-12 years (Late Elementary)</option>
-                            <option>13+ years (Teen/Adult)</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Category:</label>
-                        <select>
-                            <option>All Categories</option>
-                            <option>STEM/Learning</option>
-                            <option>Creative Arts</option>
-                            <option>Active Play</option>
-                            <option>Electronic</option>
-                            <option>Imaginative Play</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Safety Features:</label>
-                        <select>
-                            <option>All Safety Levels</option>
-                            <option>Non-Toxic Materials</option>
-                            <option>No Small Parts</option>
-                            <option>Organic/Natural</option>
-                            <option>Safety Certified</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="search-button" onclick="searchBusinesses('toys')">Find Toy Stores Near Me</button>
-        </div>
-
-        <div class="detailed-category" id="generalCategory">
-            <button class="back-button" onclick="goBack()">← Back to Categories</button>
-            <div class="category-header">
-                <div class="category-icon">🛍</div>
-                <div class="category-title">General Shopping</div>
-            </div>
-
-            <div class="location-section">
-                <div class="location-input">
-                    <input type="text" id="generalLocationInput" placeholder="Enter your city, state or ZIP code">
-                    <button class="location-btn" onclick="setLocation('general')">Set Location</button>
-                </div>
-            </div>
-
-            <div class="price-range-section">
-                <div class="price-range-title">Price Range per Item</div>
-                <input type="range" class="price-slider" min="1" max="1000" value="100" 
-                       oninput="updatePriceRange('general', this.value)">
-                <div class="price-display">$1 - $<span id="generalCurrent">100</span></div>
-            </div>
-
-            <div class="subcategories-section">
-                <div class="section-title">What are you shopping for?</div>
-                <div class="subcategory-grid">
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'electronics')">Electronics</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'home')">Home & Garden</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'books')">Books & Media</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'health')">Health & Beauty</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'sports')">Sports & Outdoors</div>
-                    <div class="subcategory-btn" onclick="selectSubcategory('general', 'automotive')">Automotive</div>
-                </div>
-            </div>
-
-            <div class="filters-section" id="generalFilters">
-                <div class="section-title">Additional Filters</div>
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label>Brand Preference:</label>
-                        <select>
-                            <option>All Brands</option>
-                            <option>Local Brands</option>
-                            <option>Independent Makers</option>
-                            <option>Eco-Friendly</option>
-                            <option>Handmade/Artisan</option>
-                            <option>Fair Trade</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Business Size:</label>
-                        <select>
-                            <option>All Business Types</option>
-                            <option>Local/Independent</option>
-                            <option>Regional Chain</option>
-                            <option>Family Owned</option>
-                            <option>Co-operative</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Shopping Method:</label>
-                        <select>
-                            <option>All Methods</option>
-                            <option>In-Store Only</option>
-                            <option>Online Available</option>
-                            <option>Curbside Pickup</option>
-                            <option>Local Delivery</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button class="search-button" onclick="searchBusinesses('general')">Find Local Stores Near Me</button>
-        </div>
-
-        <div class="results-section" id="resultsSection">
-            <h2>Local Businesses Near You</h2>
-            <div id="businessResults">
-                <!-- Results will be populated here -->
-            </div>
-        </div>
-
-        <div class="newsletter-section">
-            <h3>Get Sale Notifications</h3>
-            <p>Stay updated with local deals and promotions from businesses in your area</p>
-            <div class="newsletter-form">
-                <input type="email" placeholder="Enter your email address" id="emailInput">
-                <button onclick="subscribeNewsletter()">Subscribe for Deals</button>
-            </div
+</body>
+</html>
